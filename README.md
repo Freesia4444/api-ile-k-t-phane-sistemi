@@ -1,165 +1,137 @@
-Kütüphane Yönetim Sistemi
-Bu proje, Python ve FastAPI kullanılarak gelistirilmis modern bir kutuphane yonetim sistemidir. Proje hem konsol uygulamasi hemde web API olarak calisabilir.
-Ozellikler:
+📚 Kütüphane Yönetim Sistemi
 
-Kitap ekleme (ISBN ile otomatik veri cekme)
+Bu proje, Python ve FastAPI kullanılarak geliştirilmiş modern bir kütüphane yönetim sistemidir.
+Proje hem konsol uygulaması hem de web API olarak çalışabilir.
+
+🚀 Özellikler
+
+Kitap ekleme (ISBN ile otomatik veri çekme - Open Library API)
 
 Kitap arama ve listeleme
 
-Kitap silme
+Kitap silme (ISBN ile)
 
-JSON dosyasinda kalici veri saklama
+JSON dosyasında kalıcı veri saklama
 
+Web API üzerinden kitap yönetimi
 
-Gereksinimler:
+Testler ile güvenli geliştirme
 
-Python 
-internet
+🛠️ Gereksinimler
 
-Projeyi klonlayinnn:
+Python 3.9+
 
-git clone <repository-url>
+İnternet bağlantısı (ISBN API entegrasyonu için)
+
+📥 Kurulum
+1️⃣ Projeyi Klonlayın
+git clone <repo-link>
 cd kutuphane-yonetim-sistemi
 
-
-Sanal ortam olusturma:
-
+2️⃣ Sanal Ortam Oluşturma
 python -m venv venv
+venv\Scripts\activate  # Windows
+source venv/bin/activate  # Mac/Linux
 
-venv\Scripts\activate    
-
-
-Gerekli paketleri yüklen:
-
+3️⃣ Gerekli Paketleri Yükleyin
 pip install -r requirements.txt
 
+🖥️ Konsol Uygulaması Kullanımı
 
-Kullanım:
-
-Konsol Uygulaması:
-Terminalde klasik kutuphane yonetim uygulamasini çalıştırmak icin:
+Klasik kütüphane yönetim uygulamasını çalıştırmak için:
 
 python main.py
 
+Menü Seçenekleri:
 
-Menü Secenekleri:
-
-Kitap Ekle (ISBN ile - API) - Open Library API'sinden otomatik veri cekme
+Kitap Ekle (ISBN ile) - Open Library API'sinden otomatik veri çekme
 
 Kitap Ekle (Manuel) - Manuel kitap bilgisi girme
 
 Kitap Sil - ISBN ile kitap silme
 
-Kitaplari Listele - Tum kitaplari goruntuleme
+Kitapları Listele - Tüm kitapları görüntüleme
 
 Kitap Ara - ISBN ile kitap arama
 
-Cikis - Uygulamadan cikis
+Çıkış - Uygulamadan çıkış
 
+🌐 API Endpoints
+HTTP Metodu	Endpoint	Açıklama
+GET	/	Ana sayfa ve sistem bilgileri
+GET	/health	Sistem sağlık durumu
+GET	/books	Tüm kitapları listele
+POST	/books	ISBN ile yeni kitap ekle
+GET	/books/{isbn}	Belirli ISBN ile kitap getir
+DELETE	/books/{isbn}	Belirli ISBN ile kitap sil
+GET	/stats	Kütüphane istatistikleri
+🧪 Testler
 
-API Endpoints:
-
-GET / - Ana sayfa ve sistem bilgileri
-
-GET /health - Sistem saglik durumu
-
-GET /books - Tum kitaplari listele
-
-POST /books - ISBN ile yeni kitap ekle
-
-GET /books/{isbn} - Belirli ISBN ile kitap getir
-
-DELETE /books/{isbn} - Belirli ISBN ile kitap sil
-
-GET /stats - Kutuphane istatistikleri
-
-
-Test Etme:
-Tum testleri calistir:
+Tüm testleri çalıştırmak için:
 
 pytest
 
 
-Detayli test ciktisi icin:
+Detaylı test çıktısı için:
 
 pytest -v
 
 
-
-
-Belirli bir test dosyasini calistir:
+Belirli bir test dosyasını çalıştırmak için:
 
 pytest test_api.py -v
 
+⚙️ Kullanılan Teknolojiler
 
+Python
 
+FastAPI - Modern, hızlı web framework
 
-
-
-
-Ozellikler ve Teknolojiler:
-Kullanilan Teknoloji
-
-Python 
-
-FastAPI - Modern, hizli web framework
-
-httpx - Async HTTP client (Open Library API icin)
+httpx - Async HTTP client (Open Library API için)
 
 pytest - Test framework
 
+🧱 Programlama Prensipleri
 
-Programlama Prensipleri:
+OOP (Object-Oriented Programming) – Book ve Library sınıfları
 
-Object-Oriented Programming (OOP) - Book ve Library siniflari
+Error Handling – Kapsamlı hata yönetimi
 
+Data Persistence – JSON dosyasında veri saklama
 
+Async Programming – API çağrıları için async/await
 
-Error Handling - Kapsamli hata yonetimi
+Test-Driven Development – Kapsamlı unit testler
 
-Data Persistence - JSON dosyasinda veri saklama
-
-Async Programming - API cagriilari icin async/await
-
-Test-Driven Development - Kapsamli unit testler
-
-
-
-Hata yonetimi - Network ve API hatalar
-
-Veri Modeli:
-Book Sinifi:
-
+📦 Veri Modeli
+Book Sınıfı
 class Book:
     def __init__(self, title: str, author: str, isbn: str):
-        self.title = title   
-        self.author = author  
-        self.isbn = isbn     
+        self.title = title
+        self.author = author
+        self.isbn = isbn
 
-
-API Response Modelleri:
+API Response Modeli
+from pydantic import BaseModel
 
 class BookResponse(BaseModel):
     title: str
     author: str
     isbn: str
 
+❗ Hata Yönetimi
 
-Hata Yönetimi:
-uygun hata mesajlari nedeni
+Network Hataları: İnternet bağlantısı problemleri
 
-Network Hatalari: Internet baglantisi problemi
+API Hataları: Open Library API'sinden 404/500 hataları
 
-API Hatalari: Open Library API'sinden 404/500 hatalari
+Veri Hataları: Geçersiz JSON, eksik alanlar
 
-Veri Hatalari: Gecersiz JSON, eksik alanlar
+İş Mantığı Hataları: Duplicate ISBN, bulunamayan kitap
 
-Is Mantigi Hatalari: Duplicate ISBN, bulunamayan kitap
+Dosya Hataları: library.json okuma/yazma hataları
 
-Dosya Hatalari: library.json okuma/yazma hatalari
+📖 Lisans
 
-
-Bu proje egitim amacli gelistirilmisdir ve fast api ve api yi python olraka ogrenirken yapay zekadan ayrdim alindi.
-
-
-
+Bu proje eğitim ve öğrenme amaçlı geliştirilmiştir.
+Geliştirme sürecinde zaman zaman yapay zekadan destek alınmış, ancak proje  tarafımca hazırlanmıştır.
